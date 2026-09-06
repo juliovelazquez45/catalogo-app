@@ -1,0 +1,262 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fafafa;
+    color: #222;
+}
+
+.header {
+    background: #ea580c;
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.header h1 { font-size: 1.8rem; margin-bottom: 4px; }
+.subtitulo { opacity: 0.9; font-size: 0.95rem; }
+
+.btn-carrito {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    color: #ea580c;
+    padding: 8px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.badge {
+    background: #ea580c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    margin-left: 4px;
+}
+
+.btn-volver {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-top: 8px;
+}
+
+.filtros {
+    display: flex;
+    gap: 10px;
+    padding: 16px 20px;
+    overflow-x: auto;
+}
+
+.filtro {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #333;
+    white-space: nowrap;
+}
+
+.filtro:hover { background: #ea580c; color: white; border-color: #ea580c; }
+
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 14px;
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card h3 { font-size: 0.95rem; margin-bottom: 6px; min-height: 40px; }
+.categoria { color: #999; font-size: 0.8rem; margin-bottom: 6px; }
+.precio { font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; }
+
+.btn-agregar {
+    background: #ea580c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-agregar:hover { background: #c2410c; }
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.carrito-contenido { padding: 20px; max-width: 800px; margin: 0 auto; }
+
+.carrito-vacio {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+}
+
+.carrito-vacio .ayuda { margin: 10px 0 20px; color: #999; }
+
+.tabla-carrito {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabla-carrito th, .tabla-carrito td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-quitar {
+    background: #eee;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.resumen {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total { font-size: 1.3rem; font-weight: bold; }
+
+.btn-vaciar {
+    background: #999;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ---------- Panel de administración ---------- */
+
+.admin-contenido {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.admin-toolbar {
+    margin-bottom: 16px;
+    text-align: right;
+}
+
+.btn-nuevo {
+    display: inline-block;
+    width: auto;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.tabla-admin th, .tabla-admin td {
+    vertical-align: middle;
+}
+
+.miniatura {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.sin-imagen {
+    color: #aaa;
+    font-size: 0.8rem;
+}
+
+.acciones-admin {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-editar {
+    background: #ea580c;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.form-admin {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 500px;
+}
+
+.form-admin label {
+    font-weight: bold;
+    margin-top: 12px;
+    font-size: 0.9rem;
+}
+
+.form-admin input[type="text"],
+.form-admin input[type="number"],
+.form-admin select,
+.form-admin input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.check-label {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    flex-direction: row !important;
+}
+
+.preview-actual { margin: 6px 0; }
+
+.miniatura-grande {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 4px;
+}
+
+.btn-guardar {
+    margin-top: 20px;
+    width: auto;
+    padding: 12px 24px;
+}

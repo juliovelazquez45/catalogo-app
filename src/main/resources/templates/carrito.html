@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Carrito</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="header">
+    <h1>🛒 Tu Carrito</h1>
+    <a th:href="@{/tienda}" class="btn-volver">← Volver a la tienda</a>
+</header>
+
+<main class="carrito-contenido">
+
+    <div th:if="${items.isEmpty()}" class="carrito-vacio">
+        <p>Tu carrito está vacío</p>
+        <p class="ayuda">Agrega productos para comenzar tu pedido</p>
+        <a th:href="@{/tienda}" class="btn-agregar">Volver a la tienda</a>
+    </div>
+
+    <div th:unless="${items.isEmpty()}">
+        <table class="tabla-carrito">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.nombre}">Producto</td>
+                    <td th:text="'$' + ${#numbers.formatDecimal(item.precio, 0, 'POINT', 0, 'NONE')}">$0</td>
+                    <td th:text="${item.cantidad}">1</td>
+                    <td th:text="'$' + ${#numbers.formatDecimal(item.subtotal, 0, 'POINT', 0, 'NONE')}">$0</td>
+                    <td>
+                        <form th:action="@{/carrito/quitar}" method="post">
+                            <input type="hidden" name="productoId" th:value="${item.productoId}">
+                            <button type="submit" class="btn-quitar">Quitar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="resumen">
+            <p class="total">Total: <span th:text="'$' + ${#numbers.formatDecimal(total, 0, 'POINT', 0, 'NONE')}">$0</span></p>
+            <form th:action="@{/carrito/vaciar}" method="post">
+                <button type="submit" class="btn-vaciar">Vaciar carrito</button>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="header">
+    <h1>⚙️ Panel de Administración</h1>
+    <a th:href="@{/tienda}" class="btn-volver">← Ver la tienda</a>
+</header>
+
+<main class="admin-contenido">
+
+    <div class="admin-toolbar">
+        <a th:href="@{/admin/nuevo}" class="btn-agregar btn-nuevo">+ Nuevo producto</a>
+    </div>
+
+    <table class="tabla-carrito tabla-admin">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Destacado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p : ${productos}">
+                <td>
+                    <img th:if="${p.imagenUrl}" th:src="${p.imagenUrl}" class="miniatura" alt="">
+                    <span th:unless="${p.imagenUrl}" class="sin-imagen">Sin imagen</span>
+                </td>
+                <td th:text="${p.nombre}">Nombre</td>
+                <td th:text="${p.categoria != null ? p.categoria.nombre : '-'}">Categoría</td>
+                <td th:text="'$' + ${#numbers.formatDecimal(p.precio, 0, 'POINT', 0, 'NONE')}">$0</td>
+                <td th:text="${p.destacado ? 'Sí' : 'No'}">No</td>
+                <td class="acciones-admin">
+                    <a th:href="@{/admin/editar/{id}(id=${p.id})}" class="btn-editar">Editar</a>
+                    <form th:action="@{/admin/eliminar/{id}(id=${p.id})}" method="post"
+                          onsubmit="return confirm('¿Seguro que querés eliminar este producto?');">
+                        <button type="submit" class="btn-quitar">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p th:if="${productos.isEmpty()}" class="ayuda">Todavía no cargaste ningún producto.</p>
+
+</main>
+
+</body>
+</html>

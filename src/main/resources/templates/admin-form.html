@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${producto.id} != null ? 'Editar producto' : 'Nuevo producto'">Producto</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="header">
+    <h1 th:text="${producto.id} != null ? '✏️ Editar producto' : '➕ Nuevo producto'">Producto</h1>
+    <a th:href="@{/admin}" class="btn-volver">← Volver al panel</a>
+</header>
+
+<main class="admin-contenido">
+
+    <form th:action="@{/admin/guardar}" method="post" enctype="multipart/form-data" class="form-admin">
+
+        <input type="hidden" name="id" th:value="${producto.id}">
+
+        <label>Nombre del producto</label>
+        <input type="text" name="nombre" th:value="${producto.nombre}" required maxlength="150">
+
+        <label>Precio</label>
+        <input type="number" name="precio" th:value="${producto.precio}" step="0.01" min="0" required>
+
+        <label>Categoría</label>
+        <select name="categoriaId">
+            <option value="">-- Sin categoría --</option>
+            <option th:each="c : ${categorias}"
+                    th:value="${c.id}"
+                    th:text="${c.nombre}"
+                    th:selected="${producto.categoria != null and producto.categoria.id == c.id}">
+                Categoría
+            </option>
+        </select>
+
+        <label class="check-label">
+            <input type="checkbox" name="destacado" th:checked="${producto.destacado}">
+            Marcar como destacado
+        </label>
+
+        <label>Imagen del producto</label>
+        <div th:if="${producto.imagenUrl}" class="preview-actual">
+            <p class="ayuda">Imagen actual:</p>
+            <img th:src="${producto.imagenUrl}" class="miniatura-grande" alt="">
+        </div>
+        <input type="file" name="imagen" accept="image/*">
+        <p class="ayuda" th:if="${producto.id} != null">
+            Dejá este campo vacío si no querés cambiar la imagen actual.
+        </p>
+
+        <button type="submit" class="btn-agregar btn-guardar">Guardar producto</button>
+    </form>
+
+</main>
+
+</body>
+</html>
